@@ -9,17 +9,11 @@ class VirtualMachineExtend(VirtualMachineStep):
     def __init__(self, reader=input, writer=sys.stdout):
         super().__init__(reader, writer)
         self.handlers = {
-            "d": self._do_disassemble,
             "dis": self._do_disassemble,
-            "i": self._do_ip,
             "ip": self._do_ip,
-            "m": self._do_memory,
             "memory": self._do_memory,
-            "q": self._do_quit,
             "quit": self._do_quit,
-            "r": self._do_run,
             "run": self._do_run,
-            "s": self._do_step,
             "step": self._do_step,
         }
     # [/init]
@@ -27,13 +21,17 @@ class VirtualMachineExtend(VirtualMachineStep):
     # [interact]
     def interact(self, addr):
         prompt = "".join(sorted({key[0] for key in self.handlers}))
+        print("promt ", prompt )
         interacting = True
         while interacting:
             try:
                 command = self.read(f"{addr:06x} [{prompt}]> ")
+                com_li = [com for com in self.handlers.keys() if com.startswith(command)] # list of all commands starting with the prompt
+                if len(com_li)>0:
+                    command = com_li[0]
                 if not command:
                     continue
-                elif command not in self.handlers:
+                elif command not in com_li:
                     self.write(f"Unknown command {command}")
                 else:
                     interacting = self.handlers[command](self.ip)
