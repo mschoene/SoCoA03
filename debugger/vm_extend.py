@@ -2,7 +2,6 @@ import sys
 
 from architecture import VMState
 from vm_step import VirtualMachineStep
-from vm_base import COLUMNS, DIGITS
 
 
 class VirtualMachineExtend(VirtualMachineStep):
