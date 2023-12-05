@@ -79,13 +79,16 @@ def test_output_input_file_as3():
 # Test case for VirtualMachine - tested operations are: ldc, add, prr, hlt
 def test_output_input_file_vm1():
     vm = VirtualMachine()
+    asm = Assembler()
+    
     with open('temp.as','r') as f:
         lines_as = f.read().splitlines()
-    with open('temp_manCalc.mx','r') as m:
-        lines_mx = m.read().splitlines()
-    expected_output = lines_mx
-    print(expected_output)
-    real_output = vm.initialize(lines_as)
+    print(lines_as)
+    lines_mx = asm.assemble(lines_as)
+    program = [int(ln, 16) for ln in lines_mx if ln]
+    print(lines_mx)
+    expected_output = lines_as
+    real_output = vm.initialize(program)
     print(real_output)
     assert real_output == expected_output
 
