@@ -1,9 +1,10 @@
-ldc R1 0
-ldc R2 10
-ldr R1 R0
+ldc R0 0
+ldc R1 10
+ldr R1 R2
 loop:
-cpy R2 R1
+cpy R2 R0
+sub R1 R0
 str R2 R3
-beq R4
-prm R5
+beq R1 @loop
+prm R3
 
