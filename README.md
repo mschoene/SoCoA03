@@ -34,9 +34,11 @@ Run the tests with coverage:
 for the coverage report:
 
     - For a terminal report: 
+    
     ```coverage report```
   
     - For a detailed HTML report: 
+    
     ```coverage html```
 
 The HTML report will be in the `htmlcov` directory, open `htmlcov/index.html` in the browser to view it.
