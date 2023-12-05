@@ -17,6 +17,7 @@ class VirtualMachine:
             program[i] if (i < len(program)) else 0
             for i in range(RAM_LEN)
         ]
+        # print(self.ram)
         self.ip = 0
         self.reg = [0] * NUM_REG
 # [/init]
@@ -86,6 +87,17 @@ class VirtualMachine:
                 print(self.prompt, self.reg[arg0])
             elif op == OPS["prm"]["code"]:
                 print(self.prompt, self.ram[self.reg[arg0]])
+            # [3_1]
+            elif op == OPS["inc"]["code"]:
+                self.reg[arg0] += 1
+            elif op == OPS["dec"]["code"]:
+                self.reg[arg0] -= 1
+            # [/3_1]
+            # [3_2]
+            elif op == OPS["swp"]["code"]:
+                temp = self.reg[arg0]
+                self.reg[arg0] = self.reg[arg1]
+                self.reg[arg1] = temp
             # [/skip]
             else:
                 assert False, f"Unknown op {op:06x}"
@@ -103,6 +115,7 @@ def main(vm_cls):
     vm.initialize(program)
     vm.run()
     vm.show(writer)
+    print(vm.ram)
 
 
 if __name__ == "__main__":

@@ -9,10 +9,13 @@ class Assembler:
         instructions = [
             ln for ln in lines if not self._is_label(ln)
         ]
+        # print(instructions)
         compiled = [
             self._compile(instr, labels) for instr in instructions
         ]
+        # print(compiled)
         program = self._to_text(compiled)
+        # print(program)
         return program
 # [/class]
 
