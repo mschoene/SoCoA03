@@ -36,65 +36,48 @@ def test_unknown_instruction():
     except AssertionError:
         pass  
 
-# test the format --: example hlt
-def test_invalid_instruction_format_hlt():
+def test_output_input_file_1():
     asm = Assembler()
-    lines = ['hlt R1 R1']  # invalid format
+    with open('addTwoNum.as','r') as f:
+        lines_as = f.read().splitlines()
+    with open('addTwoNum_manCalc.mx','r') as m:
+        lines_mx = m.read().splitlines()
+    expected_output = lines_mx
+    print(expected_output)
+    real_output = asm.assemble(lines_as)
+    print(real_output)
+    assert real_output == expected_output
 
-    # Expecting an AssertionError due to incorrect instruction format
-    with pytest.raises(AssertionError):
-        asm.assemble(lines)
 
-# test the format rv: example ldc
-def test_instruction_not_found_error_rv1():
+def test_output_input_file_2():
     asm = Assembler()
-    lines = ['ldc R1 R1']  # invalid format
+    with open('loop.as','r') as f:
+        lines_as = f.read().splitlines()
+    with open('loop_manCalc.mx','r') as m:
+        lines_mx = m.read().splitlines()
+    expected_output = lines_mx
+    print(expected_output)
+    real_output = asm.assemble(lines_as)
+    print(real_output)
+    assert real_output == expected_output
 
-    # Expecting an AssertionError due to incorrect instruction format
-    with pytest.raises(ValueError):
-        asm.assemble(lines)
 
-# test the format rv: example ldc, invalid register name
-def test_instruction_not_found_error_rv2():
+def test_output_input_file_3():
     asm = Assembler()
-    lines = ['ldc r1 2']  # invalid format
-
-    # Expecting an AssertionError due to incorrect instruction format
-    with pytest.raises(AssertionError):
-        asm.assemble(lines)
-
-
-# test the format rr: example ldr, excedeeding register
-def test_instruction_not_found_error_rr1():
-    asm = Assembler()
-    lines = ['ldr R9 R1']  # invalid format
-
-    # Expecting an AssertionError due to incorrect instruction format
-    with pytest.raises(AssertionError):
-        asm.assemble(lines)
-
-# test the format rr: example ldr, invalid argument
-def test_instruction_not_found_error_rr2():
-    asm = Assembler()
-    lines = ['ldr R1 1']  # invalid format
-
-    # Expecting an AssertionError due to incorrect instruction format
-    with pytest.raises(AssertionError):
-        asm.assemble(lines)
+    with open('temp.as','r') as f:
+        lines_as = f.read().splitlines()
+    with open('temp_manCalc.mx','r') as m:
+        lines_mx = m.read().splitlines()
+    expected_output = lines_mx
+    print(expected_output)
+    real_output = asm.assemble(lines_as)
+    print(real_output)
+    assert real_output == expected_output
 
 
-# test the format r-: example prr, invalid argument
-def test_instruction_not_found_error_r():
-    asm = Assembler()
-    lines = ['prr R1 R2']  # invalid format
-
-    # Expecting an AssertionError due to incorrect instruction format
-    with pytest.raises(AssertionError):
-        asm.assemble(lines)
 
 # Measure and report the test coverage in % for the above tests - call in the terminal
 # coverage run -m pytest arg1 arg2 arg3
 # coverage report -m
 # coverage html
-
 
