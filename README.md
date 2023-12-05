@@ -3,7 +3,10 @@ Software construction assignment 3
 
 ## Unit Testing 
 
-### 
+### Test the Assembler 
+Created three files which contain the assembly code, the three files covers all the 11 instructions in OPS dictionary. Then we manually trasnlated the assembly code into machine code. 
+To test the assembler, we have created three tests which get the 
+
 
 
 ### Test coverage
