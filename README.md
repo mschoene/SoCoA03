@@ -45,6 +45,26 @@ Disassembler converts virtual machine (VM) instructions back into assembly code.
 #### Usage
 ```python disassembler.py example_input.mx example_output.as``` 
 
+## Increment and Decrement
+Two new instructions `inc` and `dec` are added to `architecture.py`. To test these functionalities, an assembly program is already provided as `example_3_1.as` in the `exercise 3` folder. The program initializes one register and load value 0 to the register, then it increments the register value by 1, prints the value, and decrements the register value by 1, and prints the value again. Note: users who run the commands from the terminal should be aware of the directory structure change and call `assembler.py` and `example_3_1.as` using relative paths.
+
+#### Usage
+```assembler.py ../exercise\ 3/example_3_1.as example_3_1.mx```
+```python vm.py example_3_1.mx -```
+
+## Swap values
+One new instruction `swp` is added to `architecture.py`. To test these functionalities, an assembly program is already provided as `example_3_2.as` in the `exercise 3` folder. The program initializes three registers with different values and prints them respectively, then it swaps the values in two registers while keeping the value in the third register intact. The program prints the values of the three registers again to showcase the result. Note: users who run the commands from the terminal should be aware of the directory structure change and call `assembler.py` and `example_3_2.as` using relative paths.
+
+#### Usage
+```assembler.py ../exercise\ 3/example_3_2.as example_3_2.mx```
+```python vm.py example_3_2.mx -```
+
+## Reverse array in place
+An assembly program `example_3_3.as` is created to showcase the initialization of one array and then to reverse it in place. Since each time `vm.py` is called, a new virtual machine is created by design, to reverse the array in place one has to fill in an array first and then reverse it in place. The program does so by setting two crucial values in R0 and R1 as the starting enumerator and end enumerator, and one value in R3 as the increment as you enumerate from R0 to R1 (exclusive). It means that these values can be changed accordingly to the length of the array. The program showcases initializing a short array containing integers from 5 to 9 and then reversing the array in place by enumerating 5 to 9 again from the backward direction.
+
+#### Usage
+```array.py ../exercise\ 3/example_3_3.as example_3_3.mx```
+```python vm.py example_3_3.mx -```
 
 ## Debugger
 
