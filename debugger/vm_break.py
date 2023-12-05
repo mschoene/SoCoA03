@@ -9,19 +9,28 @@ class VirtualMachineBreak(VirtualMachineExtend):
     def __init__(self):
         super().__init__()
         self.breaks = {}
+        self.watchpoints = {}
         self.handlers |= {
             "break": self._do_add_breakpoint,
             "clear": self._do_clear_breakpoint,
+            "watch": self._do_add_watchpoint,
         }
     # [/init]
 
     # [show]
     def show(self):
         super().show()
+        # additional printing for breaks
         if self.breaks:
             self.write("-" * 6)
             for key, instruction in self.breaks.items():
                 self.write(f"{key:06x}: {self.disassemble(key, instruction)}")
+
+        #special printing for watchpoints
+        if self.watchpoints:
+            self.write("-" * 6)
+            for key, value in self.watchpoints.items():
+                self.write(f"{key:06x}: Watchpoint ({value})")
     # [/show]
 
     # [run]
@@ -41,9 +50,30 @@ class VirtualMachineBreak(VirtualMachineExtend):
             else:
                 if self.state == VMState.STEPPING:
                     self.interact(self.ip)
+                
+                if self.ip in self.watchpoints:
+                    if self.ram[self.ip] != self.watchpoints[self.ip]:
+                        print(f"Watchpoint at address {self.ip:06x}")
+                        self.interact(self.ip)  # i.a. when watchpoint is met
+                        self.state = VMState.FINISHED
+
                 self.ip += 1
                 self.execute(op, arg0, arg1)
     # [/run]
+
+    # [add watchpoint]
+    def _do_add_watchpoint(self, addr, set_addr):
+
+        if(set_addr):
+            addr = int( set_addr[0][0])
+        #check if add is already in watchpoints
+        if addr in self.watchpoints:
+            return False 
+        
+        self.watchpoints[addr] = self.ram[addr]
+        return True
+
+    # [/add watchpoint]
 
     # [add]
     def _do_add_breakpoint(self, addr, *set_addr):
