@@ -101,6 +101,19 @@ This will show the memory held at the 5th address (010204). Then a break point i
 
 ### Watchpoint
 
+Quite the previous program with `q`.
+Then start the debugger with: 
+
+```python .\debugger\vm_break.py .\debugger\change_mem.mx```
+
 To add a watchpoint at an address write:
 
-```w 5```
+```w 5
+s
+s
+s
+s
+s
+```
+Step through until you see "Watchpoint at address 000005" pop up, indicating that the value at address 5 has changed. GG
+ 
