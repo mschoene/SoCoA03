@@ -1,14 +1,14 @@
 import sys
 import os
 
-# sys.path.append('/Users/cindyliu/Desktop/Assigment_03/')
-sys.path.insert(0, '/Users/cindyliu/Desktop/Assigment_03/vm')
-# sys.path.insert(0, '/Users/xiaochen/Downloads/hwcindi/vm')
-print(sys.path)
-from vm import VirtualMachine
-from architecture import NUM_REG, OPS, OP_MASK, OP_SHIFT, RAM_LEN
-import pytest 
+current_dir = os.path.dirname(os.path.abspath(_file_))
+parent_dir = os.path.dirname(current_dir)
+vm_dir = os.path.join(parent_dir, 'vm')
+sys.path.append(vm_dir)
 
+from vm import VirtualMachine
+from assembler import Assembler
+from architecture import NUM_REG, OPS, OP_MASK, OP_SHIFT, RAM_LEN
 
 # converts the VM instructions to assembly code 
 class Dissassembler:
