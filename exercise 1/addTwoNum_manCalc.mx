@@ -1,5 +1,5 @@
-050102 #load value 07 into reg 00 load  with command 02
-040202 # value 07 into reg 01  with load command 02
-020106 # reg 02 to reg 01 with add commant 06
-00010a # -- register 01 print with command 0A
-000001 # halt the program
+050102
+040202
+020106
+00010a
+000001
