@@ -35,6 +35,11 @@ for the coverage report:
 
 The HTML report will be in the `htmlcov` directory, open `htmlcov/index.html` in the browser to view it.
 
+## Disassembler
+Disassembler converts virtual machine (VM) instructions back into assembly code.
+
+#### Usage
+python disassemble.py input file.mx output file.as
 
 
 ## Debugger
