@@ -1,17 +1,15 @@
 import sys
 import os
+import pytest
 
-# sys.path.append('/Users/cindyliu/Desktop/Assigment_03/')
-# sys.path.insert(0, '/Users/cindyliu/Desktop/Assigment_03/')
-sys.path.insert(0, '/Users/cindyliu/Desktop/Assigment_03/vm')
-print(sys.path)
-# Importing the vm module
-# import vm 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+vm_dir = os.path.join(parent_dir, 'vm')
+sys.path.append(vm_dir)
+
 from vm import VirtualMachine
 from assembler import Assembler
 from architecture import NUM_REG, OPS, OP_MASK, OP_SHIFT, RAM_LEN
-import pytest 
-
 
 
 def test_out_of_memory_error():
@@ -36,8 +34,7 @@ def test_unknown_instruction():
     except AssertionError:
         pass  
 
-# Test case for Assembler - tested operations are: ldc, add, prr, hlt
-def test_output_input_file_as1():
+def test_output_input_file_1():
     asm = Assembler()
     with open('addTwoNum.as','r') as f:
         lines_as = f.read().splitlines()
@@ -49,8 +46,8 @@ def test_output_input_file_as1():
     print(real_output)
     assert real_output == expected_output
 
-# Test case for Assembler - tested operations are: ldc, prr, sub, bne, hlt
-def test_output_input_file_as2():
+
+def test_output_input_file_2():
     asm = Assembler()
     with open('loop.as','r') as f:
         lines_as = f.read().splitlines()
@@ -62,8 +59,8 @@ def test_output_input_file_as2():
     print(real_output)
     assert real_output == expected_output
 
-# Test case for Assembler - tested operations are: ldc, ldr, cpy, sub, str, beq, prm, hlt
-def test_output_input_file_as3():
+
+def test_output_input_file_3():
     asm = Assembler()
     with open('temp.as','r') as f:
         lines_as = f.read().splitlines()
@@ -75,21 +72,24 @@ def test_output_input_file_as3():
     print(real_output)
     assert real_output == expected_output
 
-
 # Test case for VirtualMachine - tested operations are: ldc, add, prr, hlt
 def test_output_input_file_vm1():
     vm = VirtualMachine()
     asm = Assembler()
-    
+
     with open('temp.as','r') as f:
         lines_as = f.read().splitlines()
-    print(lines_as)
     lines_mx = asm.assemble(lines_as)
+    expected_output = []
+    for num in lines_mx: 
+        expected_output.append(int(num,16))
     program = [int(ln, 16) for ln in lines_mx if ln]
-    print(lines_mx)
-    expected_output = lines_as
-    real_output = vm.initialize(program)
+    vm.initialize(program)
+    for num in vm.ram:
+        index_not_used_ram = vm.ram.index(0)
+    real_output = vm.ram[:index_not_used_ram]
     print(real_output)
+    print(expected_output)
     assert real_output == expected_output
 
 
@@ -97,30 +97,43 @@ def test_output_input_file_vm1():
 # Test case for VirtualMachine - tested operations are: ldc, prr, sub, bne, hlt
 def test_output_input_file_vm2():
     vm = VirtualMachine()
+    asm = Assembler()
+
     with open('loop.as','r') as f:
         lines_as = f.read().splitlines()
-    with open('loop_manCalc.mx','r') as m:
-        lines_mx = m.read().splitlines()
-    expected_output = lines_mx
-    print(expected_output)
-    real_output = vm.initialize(lines_as)
+    lines_mx = asm.assemble(lines_as)
+    expected_output = []
+    for num in lines_mx: 
+        expected_output.append(int(num,16))
+    program = [int(ln, 16) for ln in lines_mx if ln]
+    vm.initialize(program)
+    for num in vm.ram:
+        index_not_used_ram = vm.ram.index(0)
+    real_output = vm.ram[:index_not_used_ram]
     print(real_output)
+    print(expected_output)
     assert real_output == expected_output
+
 
 # Test case for VirtualMachine - tested operations are: ldc, ldr, cpy, sub, str, beq, prm, hlt
 def test_output_input_file_vm3():
     vm = VirtualMachine()
+    asm = Assembler()
+
     with open('temp.as','r') as f:
         lines_as = f.read().splitlines()
-    with open('temp_manCalc.mx','r') as m:
-        lines_mx = m.read().splitlines()
-    expected_output = lines_mx
-    print(expected_output)
-    real_output = vm.initialize(lines_as)
+    lines_mx = asm.assemble(lines_as)
+    expected_output = []
+    for num in lines_mx: 
+        expected_output.append(int(num,16))
+    program = [int(ln, 16) for ln in lines_mx if ln]
+    vm.initialize(program)
+    for num in vm.ram:
+        index_not_used_ram = vm.ram.index(0)
+    real_output = vm.ram[:index_not_used_ram]
     print(real_output)
+    print(expected_output)
     assert real_output == expected_output
-
-
 
 
 
