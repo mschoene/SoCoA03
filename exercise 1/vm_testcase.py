@@ -1,17 +1,19 @@
 import sys
 import os
+import pytest
 
-# sys.path.append('/Users/cindyliu/Desktop/Assigment_03/')
-# sys.path.insert(0, '/Users/cindyliu/Desktop/Assigment_03/')
-sys.path.insert(0, '/Users/cindyliu/Desktop/Assigment_03/vm')
+current_dir = os.path.dirname(os.path.abspath(_file_))
+print(current_dir)
+parent_dir = os.path.dirname(current_dir)
+print(parent_dir)
+vm_dir = os.path.join(parent_dir, 'vm')
+sys.path.append(vm_dir)
+print(vm_dir)
 print(sys.path)
-# Importing the vm module
-# import vm 
+
 from vm import VirtualMachine
 from assembler import Assembler
 from architecture import NUM_REG, OPS, OP_MASK, OP_SHIFT, RAM_LEN
-import pytest 
-
 
 
 def test_out_of_memory_error():
