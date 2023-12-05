@@ -1,15 +1,10 @@
 import sys
 import os
-import pytest
 
 current_dir = os.path.dirname(os.path.abspath(_file_))
-print(current_dir)
 parent_dir = os.path.dirname(current_dir)
-print(parent_dir)
 vm_dir = os.path.join(parent_dir, 'vm')
 sys.path.append(vm_dir)
-print(vm_dir)
-print(sys.path)
 
 from vm import VirtualMachine
 from assembler import Assembler
