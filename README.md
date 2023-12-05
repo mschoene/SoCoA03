@@ -108,12 +108,13 @@ Then start the debugger with:
 
 To add a watchpoint at an address write:
 
-```w 5
+```
+w 5
 s
 s
 s
 s
 s
 ```
-Step through until you see "Watchpoint at address 000005" pop up, indicating that the value at address 5 has changed. GG
+Step through (5 times s) until you see "Watchpoint at address 000005" pop up, indicating that the value at address 5 has changed. GG
  
