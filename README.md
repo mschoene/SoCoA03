@@ -19,19 +19,23 @@ These assembly files have been manually translated into machine code, resulting 
 
 
 #### Usage Pytest
-pytest vm_testcase.py
+In the folder exercise 1 run:
+```pytest vm_testcase.py```
+
 
 ### Test coverage
 
 Need to first install it if not having the packege: pip install pytest coverage
 
-Run the tests with coverage: coverage run -m pytest + file.py
+Run the tests with coverage: 
+
+```coverage run -m pytest vm_testcase.py```
 
 for the coverage report:
 
-    - For a terminal report: coverage report
+    - For a terminal report: ```coverage report```
   
-    - For a detailed HTML report: coverage html
+    - For a detailed HTML report: ```coverage html```
 
 The HTML report will be in the `htmlcov` directory, open `htmlcov/index.html` in the browser to view it.
 
@@ -39,7 +43,7 @@ The HTML report will be in the `htmlcov` directory, open `htmlcov/index.html` in
 Disassembler converts virtual machine (VM) instructions back into assembly code.
 
 #### Usage
-python disassemble.py input file.mx output file.as
+```python disassembler.py example_input.mx example_output.as``` 
 
 
 ## Debugger
