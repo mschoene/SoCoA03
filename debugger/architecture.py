@@ -13,6 +13,8 @@ OPS = {
     "bne": {"code": 9, "fmt": "rv"},  # Branch if not equal
     "prr": {"code": 10, "fmt": "r-"},  # Print register
     "prm": {"code": 11, "fmt": "r-"},  # Print memory
+    "ldm": {"code": 12, "fmt": "mr"},  # ex4.4: Load memory
+    "stm": {"code": 13, "fmt": "mv"},  # ex4.4: Store memory
     "brk": {"code": 15, "fmt": "--"},  # Breakpoint
 }
 

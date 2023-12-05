@@ -119,6 +119,16 @@ class VirtualMachineBase:
             self.assert_is_address(self.reg[arg0])
             self.write(f"{self.ram[self.reg[arg0]]:06x}")
 
+        elif op == OPS["stm"]["code"]:
+            self.assert_is_address(arg0)
+            self.ram[arg0] = arg1
+        
+        elif op == OPS["ldm"]["code"]:
+            self.assert_is_address(arg0)
+            self.assert_is_register(arg1)
+            self.assert_is_address(self.reg[arg1])
+            self.ram[self.reg[arg1]] = self.ram[arg0]
+
         else:
             assert False, f"Unknown op {op:06x}"
 

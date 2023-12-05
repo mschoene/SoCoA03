@@ -70,6 +70,16 @@ class Assembler:
                 self.value(args[1], labels), self.register(args[0]), OPS[op]["code"]
             )
 
+        elif OPS[op]["fmt"] == "mv":
+            result = self.combine(
+                self.value(args[1], labels), self.ram(args[0]), OPS[op]["code"]
+            )
+
+        elif OPS[op]["fmt"] == "mr":
+            result = self.combine(
+                self.register(args[1]), self.ram(args[0]), OPS[op]["code"]
+            )
+
         else:
             assert False, f"Unknown instruction format {OPS[op]['fmt']}"
 
@@ -108,6 +118,12 @@ class Assembler:
         assert token[0] == "R", f"Register '{token}' does not start with 'R'"
         r = int(token[1:])
         assert 0 <= r < NUM_REG, f"Illegal register {token}"
+        return r
+    
+    def ram(self, token):
+        assert token[0] == "M", f"ram '{token}' does not start with 'M'"
+        r = int(token[1:])
+        assert 0 <= r < RAM_LEN, f"Illegal ram {token}"
         return r
 
     def split_allocations(self, lines):
