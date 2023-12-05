@@ -1,7 +1,7 @@
 # SoCoA03
 Software construction assignment 3
 
-## Test coverage ## 
+# Test coverage #
 
 Need to first install it if not having the packege: pip install pytest coverage
 
