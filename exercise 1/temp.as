@@ -7,4 +7,5 @@ sub R1 R0
 str R2 R3
 beq R1 @loop
 prm R3
+hlt
 
