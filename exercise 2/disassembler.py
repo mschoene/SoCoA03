@@ -1,7 +1,8 @@
 import sys
 import os
+import pytest
 
-current_dir = os.path.dirname(os.path.abspath(_file_))
+current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 vm_dir = os.path.join(parent_dir, 'vm')
 sys.path.append(vm_dir)
